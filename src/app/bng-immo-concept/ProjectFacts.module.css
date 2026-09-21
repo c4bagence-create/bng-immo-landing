@@ -1,0 +1,36 @@
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 0; padding: 0; color: #302d26; list-style: none; }
+.facts *, .facts *::before, .facts *::after { box-sizing: border-box; }
+.fact { min-width: 0; text-align: center; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.scene { display: block; width: 100%; height: clamp(48px, 14vw, 88px); margin: 0 auto 6px; overflow: visible; }
+.object { transform-box: fill-box; transform-origin: center; }
+.copy { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+.value { display: block; font-size: clamp(11px, 2.65vw, 15px); font-weight: 650; letter-spacing: -.045em; line-height: 1.22; font-variant-numeric: tabular-nums; text-wrap: balance; }
+.fact:first-child .value { white-space: nowrap; }
+.detail { display: block; color: #847663; font-size: clamp(8px, 2.15vw, 10px); font-weight: 450; line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
+.formatValue { max-width: 15ch; font-size: clamp(11px, 2.5vw, 14px); letter-spacing: -.015em; }
+.priceNumber { fill: #39362f; font-family: inherit; font-weight: 700; letter-spacing: -1.7px; }
+.micro { fill: #8c785d; font-family: inherit; font-size: 7px; font-weight: 650; letter-spacing: .6px; }
+.lightMicro { fill: #fffefa; font-family: inherit; font-size: 7px; font-weight: 700; letter-spacing: .4px; }
+.coin { fill: #fffefa; font-family: Georgia, serif; font-size: 20px; font-weight: 500; letter-spacing: -1px; }
+.unit { fill: #fffefa; font-family: inherit; font-size: 14px; font-weight: 650; }
+.calendarNumber { fill: #3c382e; font-family: inherit; font-size: 29px; font-weight: 650; letter-spacing: -1.7px; }
+@media (min-width: 700px) {
+  .facts { gap: 16px; }
+  .scene { height: 93px; }
+  .value { font-size: 15px; }
+  .formatValue { font-size: 13px; }
+  .detail { font-size: 10px; }
+}
+@media (max-width: 355px) {
+  .facts { gap: 5px; }
+  .scene { height: 46px; margin-bottom: 5px; }
+  .value { font-size: 10px; }
+  .formatValue { font-size: 11px; }
+  .detail { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .facts *, .facts *::before, .facts *::after { transition: none !important; animation: none !important; }
+  .scene path { stroke-dashoffset: 0 !important; }
+}
+@media (forced-colors: active) { .value, .detail { color: CanvasText; } }

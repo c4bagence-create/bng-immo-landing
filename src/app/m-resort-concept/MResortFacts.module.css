@@ -1,0 +1,92 @@
+.facts {
+  --fact-orange: #f15a24;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 10px;
+  width: 100%;
+  max-width: var(--container, 1440px);
+  margin: 20px auto 0;
+  padding: 10px 0 0;
+  list-style: none;
+  color: #272821;
+  font-family: var(--font-mr), "BNG Sans", Arial, sans-serif;
+}
+.facts *, .facts *::before, .facts *::after { box-sizing: border-box; }
+.fact { min-width: 0; text-align: center; }
+.scene {
+  display: block;
+  width: 100%;
+  height: 92px;
+  margin: 0 auto 5px;
+  overflow: visible;
+  background: radial-gradient(ellipse at 50% 75%, #efe6d7 0%, #f6f1e9 35%, transparent 70%);
+}
+.object { transform-box: fill-box; transform-origin: center; }
+.copy { display: flex; flex-direction: column; gap: 4px; min-height: 43px; justify-content: center; }
+.value { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.04em; line-height: 1.22; font-variant-numeric: tabular-nums; text-wrap: balance; }
+.detail { display: block; color: #776c5e; font-size: 11px; line-height: 1.4; text-wrap: balance; }
+.fact:first-child .copy { gap: 2px; }
+.overview { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 22px; padding: 12px 0; border-top: 1px solid #e9e1d6; }
+.overview .scene { height: clamp(48px,15vw,76px); margin-bottom: 7px; }
+.overview .copy { min-height: 38px; gap: 4px; flex-direction: column; justify-content: start; }
+.overview .value { font-size: clamp(12px,3.05vw,15px); white-space: nowrap; letter-spacing: -.045em; }
+.overview .detail { font-size: clamp(10px,2.45vw,11px); letter-spacing: -.025em; }
+.overview .fact:first-child .value { font-size: clamp(12px,3.3vw,16px); }
+.overview .fact:first-child .detail { order: 1; }
+.priceNumber { fill: #39362f; font-family: inherit; font-size: 40px; font-weight: 750; letter-spacing: -3px; }
+.micro { fill: #84735b; font-family: inherit; font-size: 7px; font-weight: 650; letter-spacing: .7px; }
+.lightMicro { fill: #fffefa; font-family: inherit; font-size: 7px; font-weight: 700; letter-spacing: .6px; }
+.euro { fill: #fffefa; font-family: Georgia, serif; font-size: 26px; font-weight: 500; }
+.trancheNumber { font-family: inherit; font-size: 25px; font-weight: 750; letter-spacing: -1.4px; }
+.percent { font-size: 11px; letter-spacing: -.2px; }
+.calendarNumber { fill: #3c382e; font-family: inherit; font-size: 29px; font-weight: 650; letter-spacing: -1.7px; }
+.time { fill: #584632; font-family: inherit; font-size: 11px; font-weight: 650; letter-spacing: -.25px; }
+.location { gap: 14px; padding: 16px 0 4px; }
+.location .scene { height: 112px; }
+.location .value { font-size: 15px; }
+.location .detail { font-size: 11px; }
+@media (min-width: 450px) {
+  .scene { height: 106px; }
+  .value { font-size: 17px; }
+  .detail { font-size: 11px; }
+  .location .scene { height: 126px; }
+  .location .value { font-size: 18px; }
+}
+@media (min-width: 700px) {
+  .overview { gap: 20px; padding: 18px 0 8px; }
+  .overview .scene { height: 90px; }
+  .overview .value { font-size: 17px; }
+  .overview .detail { font-size: 11px; }
+  .scene { height: 116px; }
+  .copy { min-height: 46px; }
+  .value { font-size: 18px; }
+  .detail { font-size: 11px; }
+  .overview .fact:first-child .value { font-size: 19px; }
+  .overview .fact:first-child .detail { font-size: 11px; }
+  .location .scene { height: 134px; }
+}
+@media (min-width: 1100px) {
+  .scene { height: 126px; }
+  .value { font-size: 20px; }
+  .detail { font-size: 12px; }
+  .overview .scene { height: 96px; }
+  .overview .value { font-size: 18px; }
+  .overview .fact:first-child .value { font-size: 20px; }
+  .location { padding-top: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene [style] { opacity: 1 !important; }
+  .scene path { stroke-dashoffset: 0 !important; }
+}
+@media (forced-colors: active) {
+  .value, .detail { color: CanvasText; }
+}
+@media(max-width:820px) {
+  .location { margin-top: 12px; padding-top: 0; }
+  .location .scene { height: clamp(48px,8svh,75px); }
+  .location .value { font-size: 14px; }
+}
+@media(max-width:820px) and (max-height:740px) {
+  .overview { margin-top: 14px; padding-block: 8px; }
+  .overview .scene { height: 46px; }
+}

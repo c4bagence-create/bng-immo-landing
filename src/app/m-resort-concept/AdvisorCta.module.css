@@ -1,0 +1,37 @@
+.cta {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 62px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 8px 8px 8px 19px;
+  border: 1px solid #e5d5c4;
+  border-radius: 12px;
+  background: #fffaf3;
+  box-shadow: 0 3px 0 #e6d7c733, 0 10px 26px -18px #7c452d55;
+  color: #241e18;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.cta:hover { border-color: #f15a24; box-shadow: 0 8px 24px -15px #c9491c66; }
+.label { font-size: 15px; font-weight: 750; line-height: 1.2; letter-spacing: -.025em; }
+.label small { display: block; margin-top: 4px; color: #716454; font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.arrow { display: grid; width: 43px; height: 43px; flex: 0 0 43px; place-items: center; border-radius: 8px; background: #f15a24; color: #201a14; overflow: hidden; }
+.arrow svg { transition: transform .3s cubic-bezier(.22,1,.36,1); }
+.cta:hover .arrow svg { transform: translate(2px,-2px); }
+.compact { min-height: 48px; gap: 11px; padding: 5px 5px 5px 12px; border-radius: 9px; }
+.compact .label { font-size: 12px; }
+.compact .label small { font-size: 10px; margin-top: 3px; }
+.compact .arrow { width: 34px; height: 34px; flex-basis: 34px; border-radius: 6px; }
+.compact .arrow svg { width: 19px; height: 19px; }
+.submit { margin-top: 20px; cursor: pointer; }
+.submit:disabled { opacity: .45; cursor: not-allowed; }
+.submit:active:not(:disabled) { transform: scale(.975); }
+@media(max-width:820px) { .submit { margin-top: 6px; min-height: 54px; } }
+@media (prefers-reduced-motion: reduce) {
+  .cta, .arrow svg { transition: none; }
+}

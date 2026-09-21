@@ -1,0 +1,20 @@
+.gallery { width: 100%; min-width: 0; }
+.frame { position: relative; height: var(--gallery-height,clamp(230px,38svh,460px)); overflow: hidden; border-radius: 13px; background: #e9e0d4; touch-action: pan-y pinch-zoom; }
+.picture { position: absolute; inset: 0; }
+.picture img { object-fit: cover; }
+.zoom { transform: scale(1.25); }
+.caption { position: absolute; inset: auto 0 0; display: flex; align-items: end; justify-content: space-between; gap: 12px; padding: 35px 12px 12px; background: linear-gradient(transparent,#21180bc9); color: white; pointer-events: none; }
+.caption > span { font-size: 12px; font-weight: 600; line-height: 1.4; }
+.caption small { display: block; margin-bottom: 4px; font-size: 10px; font-weight: 500; letter-spacing: .06em; }
+.arrows { display: flex; gap: 6px; pointer-events: auto; }
+.arrows button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #fff8; border-radius: 50%; background: #fffaf1ed; color: #38271b; cursor: pointer; }
+.thumbs { position: relative; display: flex; gap: 10px; padding: 15px 5px 10px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+.thumbs button { position: relative; min-width: 72px; height: 54px; flex: 0 0 23%; max-width: 110px; overflow: hidden; padding: 0; border: 3px solid #fffaf3; border-radius: 8px; background: #e9e0d4; cursor: pointer; opacity: .72; box-shadow: 0 3px 6px #72512a20; transform: rotate(-2deg); transition: opacity .25s,border-color .25s,transform .35s; }
+.thumbs button:nth-child(even) { transform: rotate(2deg); }
+.thumbs button[aria-pressed="true"] { border-color: #f15a24; opacity: 1; transform: translateY(-4px) rotate(0); }
+.thumbs button:hover { opacity: 1; }
+.thumbs img { object-fit: cover; }
+.thumbs button:focus-visible { outline-offset: -3px; }
+.arrows button:active { transform: scale(.95); }
+@media(min-width:900px) { .caption { padding: 50px 20px 18px; } .caption > span { font-size: 15px; } .thumbs button { height: 60px; } }
+@media(prefers-reduced-motion:reduce) { .thumbs button { transition: none; } }
