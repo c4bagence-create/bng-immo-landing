@@ -18,6 +18,7 @@ import ProjectAmenities from "./ProjectAmenities";
 import ProjectPayment from "./ProjectPayment";
 import ProjectQualification from "./ProjectQualification";
 import KineticHeading from "./KineticHeading";
+import DeliveredResidence from "./DeliveredResidence";
 import { PROJECTS } from "./projects";
 import { type ProjectId } from "./types";
 import styles from "./BngGeneral.module.css";
@@ -101,7 +102,7 @@ export default function BngGeneral() {
           <div className={styles.headlineSpace} aria-live={autoPlay ? "off" : "polite"} aria-atomic="true">
             <KineticHeading key={project.id} as="h1" text={project.headline} accent={project.highlight} />
           </div>
-          {project.soldOut && <p className={styles.soldDescription}>{project.description}</p>}
+          {project.id === "plaza-view" ? <DeliveredResidence /> : project.soldOut && <p className={styles.soldDescription}>{project.description}</p>}
           <ProjectFacts key={project.id} project={project} />
           {project.features.length > 0 && <ProjectAmenities project={project} />}
           <div className={styles.heroActions}>

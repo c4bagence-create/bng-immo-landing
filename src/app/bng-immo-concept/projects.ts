@@ -202,7 +202,7 @@ export const PROJECTS: BngProject[] = [
     category: "Livré · Sold out",
     headline: "Au cœur de Guéliz.",
     highlight: "Livré. Sold out.",
-    description: "20 à 30 % de plus-value à la livraison, selon BNG. Résultat historique, non garanti pour les autres projets.",
+    description: "Résidence de 32 appartements livrée à Guéliz en juin 2025.",
     price: null,
     surface: "32 appartements",
     format: "Résidence livrée",
