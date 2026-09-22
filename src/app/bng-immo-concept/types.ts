@@ -5,6 +5,7 @@ export type BngProject = {
   id: ProjectId;
   name: string;
   soldOut?: boolean;
+  waitlist?: boolean;
   delivered?: boolean;
   kind: "villa" | "apartment" | "land";
   category: string;

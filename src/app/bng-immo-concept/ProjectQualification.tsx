@@ -94,7 +94,7 @@ export default function ProjectQualification({ project }: QualificationProps) {
 
       <form id="qualification" ref={formRef} className={`${styles.form} ph-no-capture`} data-clarity-mask="true" tabIndex={-1} aria-labelledby={`${formId}-title`} onSubmit={handleSubmit} noValidate>
         <header className={styles.formHeading}>
-          <p className={styles.projectBadge}><span aria-hidden="true" />{project.soldOut ? `Une alternative à ${project.name} · projet vendu` : project.name}</p>
+          <p className={styles.projectBadge}><span aria-hidden="true" />{project.name}</p>
         </header>
 
         <div className={styles.fields}>

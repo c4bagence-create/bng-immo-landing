@@ -1,7 +1,7 @@
 /** Snapshot read from Vertex with only “Lot Disponible” enabled. Not live inventory. */
 export const ALMA_STOCK_CHECKED = "2026-09-21";
-/** Updated total supplied by BNG on 22/09/2026; remaining lot IDs not supplied. */
-export const ALMA_AVAILABLE_COUNT = 7;
+/** Current commercial status supplied by BNG after the earlier seven-lot update. */
+export const ALMA_AVAILABLE_COUNT = 0;
 export const ALMA_STOCK_SOURCE = "https://vertex-france.com/PACKAGE/BNG_IMMO/ALMA/navigation/menu/index.html#model";
 export const ALMA_LOTS = [
   { id: "V01", price: 3633000, surface: 179 },
