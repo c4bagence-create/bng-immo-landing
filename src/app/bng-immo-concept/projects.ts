@@ -208,7 +208,7 @@ export const PROJECTS: BngProject[] = [
     format: "Résidence livrée",
     location: "Guéliz",
     delivery: "Juin 2025",
-    features: ["Chantier lancé en 2024", "Piscine en rooftop", "Salle de sport", "Livré en juin 2025"],
+    features: ["Chantier lancé en 2024", "Piscine en rooftop", "Salle de sport", "20 à 30 % de plus-value à la livraison"],
     photos: [
       photo("plaza-view/02-sejour.jpeg", "Séjour meublé d’un appartement El Messaoudi Home", "Le séjour"),
       photo("plaza-view/03-chambre.jpeg", "Chambre aménagée avec dressing à El Messaoudi Home", "La chambre et son dressing"),
