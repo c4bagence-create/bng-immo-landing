@@ -2,20 +2,20 @@
 
 ## 1. Périmètre livré
 
-Extraction autonome du travail validé au 21 septembre 2026. La page de référence est `/bng-immo-concept`. Le dépôt contient le code UI, les SVG animés, photos locales, témoignages, sources des prix/échéanciers dans les données, tests et configuration de build. Aucun service FAME, login interne, middleware d’auth, base agence, PostHog global, Clarity d’un autre client, Sentry, service worker ou clé privée n’a été transféré.
+Extraction autonome du travail validé au 22 septembre 2026. La page de référence est `/bng-immo-concept`. Le dépôt contient le code UI, les SVG animés, photos locales, témoignages, sources des prix/échéanciers dans les données, tests et configuration de build. Aucun service FAME, login interne, middleware d’auth, base agence, PostHog global, Clarity d’un autre client, Sentry, service worker ou clé privée n’a été transféré.
 
 La racine `/` redirige vers la page générale afin de conserver les routes existantes. Le développeur peut ensuite décider de la monter à la racine, à une URL de campagne ou sur un sous-domaine BNG. Vérifier alors les ancres, la portée du consentement et les métadonnées.
 
 ## 2. Données et contenus
 
-- `src/app/bng-immo-concept/projects.ts` : cinq projets, prix en DH, surfaces, localisation, livraison, photos et échéanciers. C’est la source utilisée par le hero et le plan de paiement synchronisés.
+- `src/app/bng-immo-concept/projects.ts` : sept projets, prix en DH, surfaces, localisation, livraison, photos et échéanciers. C’est la source utilisée par le hero et le plan de paiement synchronisés.
 - `types.ts` : schéma `BngProject` / `PaymentStep`.
 - `ProjectProofs.tsx` (dossier M Resort) : El Messaoudi Home, Jardin d’Éden et Jardin d’Alma.
 - `ClientStories.tsx` : témoignages réels locaux.
 - `BngGeneral.tsx` : ordre des sections, textes, CTA et lien WhatsApp public +212673322505.
 - SVG de données : `ProjectFacts`, `ProjectAmenities`, `ProjectPayment`, `BngLegalDossier`, `FinalInvitation`, `AnimatedBngLogo`.
 
-Derniers montants utilisés par la page générale : Alma 2 900 000 DH, M Resort 1 252 000 DH, Naïa Hills 1 500 000 DH, Elyazia 869 500 DH, Ayline Garden 1 750 000 DH. À revalider avec le stock BNG avant publication. L’ancienne note de vérification du 19 septembre mentionnée dans un commentaire source est remplacée ici par les données actuelles ; ce n’est pas un inventaire temps réel.
+Derniers montants utilisés par la page générale : Alma 2 986 400 DH, M Resort 1 252 000 DH, Naïa Hills 1 500 000 DH, Elyazia 869 500 DH, Ayline Garden 1 750 000 DH. Jardin d’Éden et El Messaoudi Home sont présentés comme vendus. À revalider avec le stock BNG avant publication ; ce n’est pas un inventaire temps réel.
 
 Échéanciers : Alma 30/20/20/20/10 (réservation, M6, M12, M18, clés), M Resort 30/15/15/40 (réservation, M6, M12, clés), Naïa 30/40/15/15 (réservation, M6, M12, remise du titre), Elyazia 40/25/20/15 (réservation, M6, M12, clés), Ayline 80/20 (réservation, remise du titre).
 
@@ -35,18 +35,18 @@ Le nom du CRM, son endpoint, ses identifiants et le mapping des champs ne sont p
 {
   "submissionId": "UUID stable pour une tentative et ses retries",
   "projectId": "jardin-alma",
-  "budget": "2m-3m",
+  "budget": "200k-300k-eur",
   "timing": "under-3-months",
   "firstname": "Prénom",
   "phone": "+212…"
 }
 ```
 
-Budgets : `up-to-500k`, `500k-1m`, `1m-2m`, `2m-3m`, `over-3m`, `to-define`. Il s’agit du **prix total envisagé**, pas de l’apport.
+Budgets : `up-to-100k-eur`, `100k-150k-eur`, `150k-200k-eur`, `200k-300k-eur`, `over-300k-eur`, `to-define`. Il s’agit du **prix total envisagé en euros**, pas de l’apport.
 
 Horizons : `under-3-months`, `3-6-months`, `over-6-months`, `exploring`.
 
-Projets : `jardin-alma`, `m-resort`, `naia-hills`, `elyazia`, `ayline-garden`.
+Projets : `jardin-alma`, `m-resort`, `naia-hills`, `elyazia`, `ayline-garden`, `jardin-eden`, `plaza-view` (identifiant technique conservé pour El Messaoudi Home).
 
 À implémenter :
 
@@ -100,4 +100,4 @@ Les layouts contiennent `robots: { index: false, follow: false }` pour les aper�
 
 ## 8. Transmission GitHub
 
-Dépôt privé. Travail livré sur `codex/developer-handoff` via pull request, sans accès donné à un tiers automatiquement. Le développeur doit être invité avec son compte GitHub par le propriétaire. Aucun transfert de propriété ni publication publique n’est nécessaire.
+Dépôt public. La branche principale `main` contient la version validée ; les évolutions continuent de passer par une branche et une pull request avant fusion.

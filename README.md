@@ -26,7 +26,7 @@ npm start
 
 | URL | Rôle |
 | --- | --- |
-| `/bng-immo-concept` | **Version principale actuelle**, cinq projets, sélection synchronisée, prix et échéanciers en DH |
+| `/bng-immo-concept` | **Version principale actuelle**, sept projets, sélection synchronisée, prix et échéanciers en DH |
 | `/m-resort-concept` | Variante dédiée historique M Resort |
 | `/jardin-alma-concept` | Variante dédiée historique Jardin d’Alma |
 
@@ -56,4 +56,4 @@ docs/                       reprise et inventaire médias
 
 Les médias BNG sont remis pour ce projet ; aucun droit de réutilisation pour d’autres clients n’est accordé par ce dépôt. Les anciens médias de placement conservés dans `placeholders/` et `payment/` ne sont pas à présenter comme preuves réelles. La version générale emploie des SVG pour le paiement.
 
-Pas de licence open source ajoutée : dépôt privé destiné au client et à son développeur.
+Pas de licence open source ajoutée : le dépôt est public pour faciliter la transmission au client et à son développeur, sans autorisation générale de réutilisation des médias BNG.
