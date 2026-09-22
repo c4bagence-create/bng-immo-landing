@@ -27,8 +27,8 @@ function FactScene({ kind, project, airport }: { kind: FactKind; project: BngPro
   const orange = `url(#${id}-orange)`;
   const year = project.delivery.match(/\b20\d{2}\b/)?.[0] ?? "—";
   const period = project.delivery.replace(year, "").trim().toUpperCase() || "PRÉVU";
-  const ticketNumber = project.price === null ? "DH" : number(project.price / (project.price >= 1_000_000 ? 1_000_000 : 1_000));
-  const ticketUnit = project.price === null ? "SUR DEMANDE" : project.price >= 1_000_000 ? "MILLIONS DH" : "MILLE DH";
+  const ticketNumber = project.soldOut && project.price === null ? "VENDU" : project.price === null ? "DH" : number(project.price / (project.price >= 1_000_000 ? 1_000_000 : 1_000));
+  const ticketUnit = project.soldOut && project.price === null ? "TOUS LES LOTS" : project.price === null ? "SUR DEMANDE" : project.price >= 1_000_000 ? "MILLIONS DH" : "MILLE DH";
   const enter = (delay = 0, y = 12, rotate = 0) => ({
     variants: {
       hidden: { y: reduced ? 0 : y, rotate: reduced ? 0 : rotate },
@@ -133,10 +133,10 @@ export default function ProjectFacts({ project }: { project: BngProject }) {
   const squareMeters = project.surface.match(/\d[\d\s.,]*\s*m²/)?.[0].trim();
   const apartmentFormat = project.format.replace(/chambres/g, "ch.").replace(/\s*·\s*/g, " / ");
   const facts: Fact[] = [
-    { kind: "price", value: shortPrice(project.price), detail: project.price === null ? "Prix du lot" : "À partir de", accessible: project.price === null ? "Prix du lot sur demande" : `À partir de ${formatDH(project.price)}` },
-    { kind: "plan", value: squareMeters ?? apartmentFormat, detail: project.kind === "land" ? "Terrain dès" : squareMeters ? "Habitables" : "Appartements", accessible: `${project.surface}. ${project.format}` },
+    { kind: "price", value: project.soldOut && project.price === null ? "Sold out" : shortPrice(project.price), detail: project.soldOut ? project.price === null ? "Tous les lots vendus" : "Ancien prix dès" : project.price === null ? "Prix du lot" : "À partir de", accessible: project.soldOut ? project.price === null ? "Tous les lots vendus" : `Ancien prix de départ : ${formatDH(project.price)}. Programme vendu.` : project.price === null ? "Prix du lot sur demande" : `À partir de ${formatDH(project.price)}` },
+    { kind: "plan", value: project.delivered ? project.surface : squareMeters ?? (project.kind === "villa" ? project.surface : apartmentFormat), detail: project.delivered ? "Livrés" : project.kind === "land" ? "Terrain dès" : squareMeters ? "Habitables" : project.kind === "villa" ? "Résidence" : "Appartements", accessible: `${project.surface}. ${project.format}` },
     { kind: "location", value: project.proximity?.duration ?? (airport ? `≈ ${airport.replace(/^[≈~]\s*/, "")}` : project.location.replace(/^KM\d+\s*·\s*/, "")), detail: project.proximity?.label ?? (airport ? "Aéroport" : "Marrakech"), accessible: project.proximity ? `À ${project.proximity.duration} de ${project.proximity.label}` : airport ? `Aéroport : environ ${airport.replace(/^[≈~]\s*/, "")}, selon la circulation` : project.location },
-    { kind: "delivery", value: shortDelivery(project.delivery), detail: "Livraison prévue", accessible: `Livraison prévue : ${project.delivery}` },
+    { kind: "delivery", value: shortDelivery(project.delivery), detail: project.delivered ? "Livré" : "Livraison prévue", accessible: `${project.delivered ? "Livré" : "Livraison prévue"} : ${project.delivery}` },
   ];
   return <ul className={styles.facts} aria-label={`${project.name} en bref`} data-project-facts={project.id}>
     {facts.map(fact => <li key={fact.kind} className={styles.fact}>

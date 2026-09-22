@@ -38,7 +38,7 @@ const STEPS = [
   { scene: "plan", title: "Votre lot", text: "Plan, surface & étage" },
   { scene: "contract", title: "Le contrat", text: "Prix, frais & échéances" },
   { scene: "guarantees", title: "Les garanties", text: "Les conditions, en détail" },
-  { scene: "signature", title: "Le notaire", text: "Avant toute signature" },
+  { scene: "signature", title: "Le notaire", text: "À l’éclatement du titre" },
 ] as const;
 
 function sequenceFor(scene: Scene, node: HTMLElement): Segment[] {

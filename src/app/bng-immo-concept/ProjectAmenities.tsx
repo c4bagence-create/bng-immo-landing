@@ -5,14 +5,21 @@ import { useId } from "react";
 import type { BngProject } from "./types";
 import styles from "./ProjectAmenities.module.css";
 
-type AmenityKind = "pool" | "lagoon" | "rooftop" | "padel" | "padel-fitness" | "fitness" | "fitness-outdoor" | "fitness-roof" | "security" | "parking" | "plot" | "playground" | "terrace" | "facades" | "floors" | "basement";
+type AmenityKind = "construction" | "camera" | "report" | "signature" | "pool" | "lagoon" | "rooftop" | "padel" | "padel-fitness" | "fitness" | "fitness-outdoor" | "fitness-roof" | "security" | "parking" | "plot" | "playground" | "terrace" | "facades" | "floors" | "basement";
 type Amenity = { kind: AmenityKind; label: string; detail?: string };
 
 const AMENITIES: Record<string, Amenity> = {
+  "Chantier lancé en 2024": { kind: "construction", label: "Début chantier", detail: "2024" },
+  "Piscine en rooftop": { kind: "pool", label: "Piscine", detail: "en rooftop" },
+  "Livré en juin 2025": { kind: "signature", label: "Livré", detail: "juin 2025" },
+  "28 villas": { kind: "floors", label: "28 villas" },
+  "Chantier en cours": { kind: "construction", label: "Chantier", detail: "en cours" },
+  "Suivi du chantier par caméra": { kind: "camera", label: "Suivi du chantier", detail: "par caméra" },
   "Piscine privée": { kind: "pool", label: "Piscine privée" },
   "Rooftop": { kind: "rooftop", label: "Rooftop" },
   "Padel & fitness": { kind: "padel-fitness", label: "Padel & fitness" },
   "Résidence sécurisée": { kind: "security", label: "Résidence", detail: "sécurisée" },
+  "Résidence de 88 villas": { kind: "security", label: "Résidence", detail: "de 88 villas" },
   "2 piscines, dont un lagon": { kind: "lagoon", label: "2 piscines", detail: "dont un lagon" },
   "2 terrains de padel": { kind: "padel", label: "2 terrains", detail: "de padel" },
   "Salle de sport": { kind: "fitness", label: "Salle de sport" },
@@ -55,6 +62,31 @@ function AmenityScene({ kind }: { kind: AmenityKind }) {
       <linearGradient id={`${id}-orange`} x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ffad79" /><stop offset="1" stopColor="#f15a24" /></linearGradient>
     </defs>
     <ellipse cx="61" cy="75" rx="38" ry="4" fill="#b49e7e" opacity=".11" />
+    {kind === "construction" && <>
+      <motion.g {...enter()}><path d="M20 66L55 47L98 65L62 82Z" fill="#ded1bb" /><path d="M31 60V38L62 53V74M62 53L89 38V60" fill={paper} stroke="#baa789" strokeWidth="2" /><path d="M31 38L58 24L89 38L62 53Z" fill="#f6eddf" stroke="#baa789" /><path d="M44 46V63M73 48V64" stroke="#c6b597" strokeWidth="3" /></motion.g>
+      <motion.path d="M17 67V13H98M10 23H89L75 13M17 13L42 23M25 13L50 23M33 13L58 23" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" fill="none" {...draw()} />
+      <motion.g {...enter(.35, -12)}><path d="M92 23V42Q92 49 86 47" fill="none" stroke="#937e60" strokeWidth="1.5" /><path d="M79 52L88 47L100 53L91 58Z" fill={orange} /></motion.g>
+    </>}
+    {kind === "report" && <>
+      <motion.g {...enter(0, 7, -7)}><path d="M34 17H88V77H34Z" fill="#dbccb4" /><rect x="29" y="11" width="56" height="61" rx="5" fill={paper} stroke="#ccbba0" /><rect x="43" y="7" width="28" height="10" rx="3" fill={orange} /><path d="M51 30H75M51 44H75M51 58H69" stroke="#c3b296" strokeWidth="2" strokeLinecap="round" />
+      {[29,43,57].map((y, i) => <motion.path key={y} d={`M35 ${y}l4 4 6-8`} fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...draw(.2 + i * .2)} />)}</motion.g>
+    </>}
+    {kind === "camera" && <>
+      <motion.g {...enter(0, 7, -4)}>
+        <path d="M25 33H91Q99 33 99 41V70Q99 78 91 78H25Q17 78 17 70V41Q17 33 25 33Z" fill={paper} stroke="#bba789" strokeWidth="2" />
+        <path d="M34 33L42 22H65L73 33" fill="#e8dbc5" stroke="#bba789" strokeWidth="2" strokeLinejoin="round" />
+        <circle cx="60" cy="56" r="17" fill="#d6c5aa" stroke="#a99170" strokeWidth="2" />
+        <circle cx="60" cy="56" r="10" fill="#3f463e" />
+        <circle cx="56" cy="52" r="3" fill="#dcebdc" opacity=".9" />
+        <motion.circle cx="87" cy="45" r="4" fill="#f15a24" initial={reduced ? false : { opacity: .25 }} animate={reduced ? undefined : { opacity: [.25, 1, .25] }} transition={reduced ? undefined : { duration: 1.35, repeat: Infinity }} />
+      </motion.g>
+      <motion.path d="M23 67Q36 74 48 69M76 69Q86 73 94 66" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" {...draw(.45)} />
+    </>}
+    {kind === "signature" && <>
+      <motion.g {...enter(0, 7, -5)}><path d="M23 24L86 15L97 69L34 78Z" fill="#e1d2bc" /><path d="M20 19L83 10L94 64L31 73Z" fill={paper} stroke="#d0bfa5" /><path d="M35 28L67 24M37 35L77 29" stroke="#c1ae90" strokeWidth="2" strokeLinecap="round" />
+      <motion.path d="M36 58C54 30 41 65 54 49S53 66 66 52S66 62 78 48M39 63L78 57" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" {...draw(.35)} /></motion.g>
+      <motion.g {...enter(.3, -9, 12)}><path d="M99 19L78 58L76 68L83 61L104 22Z" fill="#494331" /><path d="M99 19L104 22M78 58L83 61" stroke="#cbad76" strokeWidth="2" /></motion.g>
+    </>}
     {(kind === "pool" || kind === "lagoon") && <motion.g {...enter()}>
       <path d="M14 46L61 22L108 44V52L60 77L14 54Z" fill="#d8c5a7" />
       <path d="M14 46L61 22L108 44L60 69Z" fill={paper} stroke="#d1bfa1" strokeWidth="1.2" />

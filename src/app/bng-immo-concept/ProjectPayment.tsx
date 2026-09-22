@@ -6,6 +6,7 @@ import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { formatDH, type BngProject, type PaymentStep } from "./types";
 import styles from "./ProjectPayment.module.css";
 import KineticHeading from "./KineticHeading";
+import SoldOutMark from "./SoldOutMark";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -183,9 +184,15 @@ function PaymentSchedule({ project }: { project: BngProject }) {
 }
 
 export default function ProjectPayment({ project }: { project: BngProject }) {
+  if (project.payments.length === 0) return <section id="paiement" className={styles.flow} aria-labelledby="bng-payment-title" data-payment-project={project.id}>
+    <header className={styles.header}><KineticHeading id="bng-payment-title" text={project.name} accent="Entièrement vendu." breakBeforeAccent /></header>
+    <SoldOutMark key={project.id} inline delivered={project.delivered} />
+    {!project.delivered && <p>Échéancier historique non renseigné.</p>}
+  </section>;
   return <section id="paiement" className={styles.flow} aria-labelledby="bng-payment-title" data-payment-project={project.id}>
     <header className={styles.header}>
       <KineticHeading id="bng-payment-title" text="Votre achat." accent="À votre rythme." breakBeforeAccent />
+      {project.soldOut && <p>SOLD OUT · Échéancier historique — commercialisation terminée.</p>}
     </header>
     <PaymentSchedule key={project.id} project={project} />
   </section>;

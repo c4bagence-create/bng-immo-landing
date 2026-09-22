@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { BngProject } from "./types";
 import styles from "./BngGeneral.module.css";
 import { trackBngEvent } from "./meta-pixel";
+import SoldOutMark from "./SoldOutMark";
 
 /** Key this component by project: a photograph can never leak between programmes. */
 export default function ProjectGallery({ project, hero = false }: { project: BngProject; hero?: boolean }) {
@@ -33,6 +34,7 @@ export default function ProjectGallery({ project, hero = false }: { project: Bng
       <motion.div key={photo.src} className={styles.galleryImage} initial={reduced ? false : { opacity: .35, scale: 1.035 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .45 }}>
         <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 820px) 96vw, 65vw" priority={hero && index === 0} />
       </motion.div>
+      {project.soldOut && <SoldOutMark delivered={project.delivered} />}
       <div className={styles.photoArrows}><button type="button" onClick={() => select(index - 1)} aria-label={`${project.name} : image précédente`}><ArrowLeft size={19} /></button><button type="button" onClick={() => select(index + 1)} aria-label={`${project.name} : image suivante`}><ArrowRight size={19} /></button></div>
     </div>
     <div className={styles.photoCaption} aria-live="polite" aria-atomic="true"><span aria-label={`Image ${index + 1} sur ${project.photos.length}`}>{index + 1} / {project.photos.length}</span></div>

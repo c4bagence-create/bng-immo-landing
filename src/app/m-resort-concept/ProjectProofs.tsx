@@ -10,9 +10,9 @@ import PhotoGallery, { type GalleryPhoto } from "./PhotoGallery";
 const still = (name: string) => `/m-resort-concept/projects/stills/${name}.jpg`;
 const PHOTOS: Record<string, GalleryPhoto[]> = {
   plaza: [
-    { src: "/m-resort-concept/proof/plaza-view-1.jpg", alt: "Sofien devant les boîtes aux lettres de Plaza View", caption: "Sur place avec Sofien", zoom: true },
-    { src: "/m-resort-concept/proof/plaza-view-2.jpg", alt: "Cuisine et séjour achevés à Plaza View", caption: "Les appartements livrés", zoom: true },
-    { src: "/m-resort-concept/proof/plaza-view-3.jpg", alt: "Séjour terminé à Plaza View", caption: "Les finitions, en images", zoom: true },
+    { src: "/m-resort-concept/proof/plaza-view-1.jpg", alt: "Sofien devant les boîtes aux lettres de El Messaoudi Home", caption: "Sur place avec Sofien", zoom: true },
+    { src: "/m-resort-concept/proof/plaza-view-2.jpg", alt: "Cuisine et séjour achevés à El Messaoudi Home", caption: "Les appartements livrés", zoom: true },
+    { src: "/m-resort-concept/proof/plaza-view-3.jpg", alt: "Séjour terminé à El Messaoudi Home", caption: "Les finitions, en images", zoom: true },
   ],
   eden: [
     { src: still("eden-7"), alt: "Vue drone des villas en gros œuvre à Jardin d’Éden", caption: "Les villas, vues du ciel" },
@@ -39,11 +39,11 @@ const PHOTOS: Record<string, GalleryPhoto[]> = {
 const PROJECTS = [
   {
     id: "plaza",
-    name: "Plaza View",
+    name: "El Messaoudi Home",
     status: "Résidence livrée",
     title: "Déjà livré,",
     accent: "à Guéliz.",
-    body: "Plaza View et Messaoudi : 88 appartements haut standing, vendus en deux semaines.",
+    body: "El Messaoudi Home : des appartements haut standing entièrement vendus.",
     thumbnail: "/m-resort-concept/proof/plaza-view-2.jpg",
     type: "gallery" as const,
     images: ["/m-resort-concept/proof/plaza-view-1.jpg", "/m-resort-concept/proof/plaza-view-2.jpg", "/m-resort-concept/proof/plaza-view-3.jpg"],

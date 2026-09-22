@@ -17,12 +17,21 @@ type QualificationProps = {
 };
 
 const budgetOptions = [
-  { value: "up-to-500k", label: "≤ 500 000", accessible: "Jusqu’à 500 000 DH, dont les budgets de 100 000 DH" },
-  { value: "500k-1m", label: "500 000–1 M", accessible: "De 500 000 à 1 000 000 DH" },
-  { value: "1m-2m", label: "1–2 M", accessible: "De 1 000 000 à 2 000 000 DH" },
-  { value: "2m-3m", label: "2–3 M", accessible: "De 2 000 000 à 3 000 000 DH" },
-  { value: "over-3m", label: "+ 3 M", accessible: "Plus de 3 000 000 DH" },
+  { value: "up-to-100k-eur", label: "≤ 100 000 €", accessible: "Jusqu’à 100 000 euros" },
+  { value: "100k-150k-eur", label: "100–150 k€", accessible: "De 100 000 à 150 000 euros" },
+  { value: "150k-200k-eur", label: "150–200 k€", accessible: "De 150 000 à 200 000 euros" },
+  { value: "200k-300k-eur", label: "200–300 k€", accessible: "De 200 000 à 300 000 euros" },
+  { value: "over-300k-eur", label: "+ 300 k€", accessible: "Plus de 300 000 euros" },
   { value: "to-define", label: "À définir", accessible: "Budget encore à définir" },
+];
+const countryCodes = [
+  { value: "+212", label: "🇲🇦 +212", name: "Maroc" },
+  { value: "+33", label: "🇫🇷 +33", name: "France" },
+  { value: "+32", label: "🇧🇪 +32", name: "Belgique" },
+  { value: "+41", label: "🇨🇭 +41", name: "Suisse" },
+  { value: "+31", label: "🇳🇱 +31", name: "Pays-Bas" },
+  { value: "+44", label: "🇬🇧 +44", name: "Royaume-Uni" },
+  { value: "+1", label: "🇨🇦 +1", name: "Canada / États-Unis" },
 ];
 const timingOptions = [
   { value: "under-3-months", label: "Dans les 3 mois" },
@@ -35,9 +44,10 @@ export default function ProjectQualification({ project }: QualificationProps) {
   const formId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [answers, setAnswers] = useState<QualificationAnswers>({ budget: "", timing: "", firstname: "", phone: "" });
+  const [countryCode, setCountryCode] = useState("+212");
   const [errors, setErrors] = useState<QualificationErrors>({});
   const [checkedSignature, setCheckedSignature] = useState<string | null>(null);
-  const currentSignature = JSON.stringify([project.id, answers]);
+  const currentSignature = JSON.stringify([project.id, answers, countryCode]);
   const locallyChecked = checkedSignature === currentSignature;
 
   function updateAnswer(field: QualificationField, value: string) {
@@ -54,9 +64,10 @@ export default function ProjectQualification({ project }: QualificationProps) {
     if (!answers.timing) nextErrors.timing = "Choisissez votre horizon d’achat.";
     if (!answers.firstname.trim()) nextErrors.firstname = "Indiquez votre prénom.";
     const phone = answers.phone.trim();
-    const digits = phone.replace(/\D/g, "");
+    const normalizedPhone = phone.startsWith("+") ? phone : `${countryCode} ${phone}`;
+    const digits = normalizedPhone.replace(/\D/g, "");
     if (!phone || !/^\+?[\d\s().-]+$/.test(phone) || digits.length < 8 || digits.length > 15) {
-      nextErrors.phone = "Vérifiez votre numéro et l’indicatif du pays.";
+      nextErrors.phone = "Vérifiez votre numéro de téléphone.";
     }
     setErrors(nextErrors);
     const firstInvalidField = Object.keys(nextErrors)[0];
@@ -83,12 +94,12 @@ export default function ProjectQualification({ project }: QualificationProps) {
 
       <form id="qualification" ref={formRef} className={`${styles.form} ph-no-capture`} data-clarity-mask="true" tabIndex={-1} aria-labelledby={`${formId}-title`} onSubmit={handleSubmit} noValidate>
         <header className={styles.formHeading}>
-          <p className={styles.projectBadge}><span aria-hidden="true" />{project.name}</p>
+          <p className={styles.projectBadge}><span aria-hidden="true" />{project.soldOut ? `Une alternative à ${project.name} · projet vendu` : project.name}</p>
         </header>
 
         <div className={styles.fields}>
           <fieldset className={styles.choiceGroup} aria-describedby={`${formId}-budget-hint${errors.budget ? ` ${formId}-budget-error` : ""}`}>
-            <legend>Budget disponible <span>en DH</span></legend>
+            <legend>Budget disponible <span>en euros</span></legend>
             <p id={`${formId}-budget-hint`} className={styles.budgetHint}>Pour le prix total du bien</p>
             <div className={styles.budgetOptions}>
               {budgetOptions.map(option => (
@@ -123,8 +134,16 @@ export default function ProjectQualification({ project }: QualificationProps) {
           </div>
 
           <div className={styles.field}>
-            <label htmlFor={`${formId}-phone`}>Téléphone <span>avec l’indicatif du pays</span></label>
-            <input id={`${formId}-phone`} name="phone" type="tel" inputMode="tel" autoComplete="tel" value={answers.phone} onChange={event => updateAnswer("phone", event.target.value)} placeholder="Ex. +212 6 00 00 00 00" maxLength={30} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? `${formId}-phone-error` : undefined} required />
+            <label htmlFor={`${formId}-phone`}>Téléphone</label>
+            <div className={styles.phoneRow}>
+              <label className={styles.countryCode}>
+                <span className={styles.srOnly}>Indicatif du pays</span>
+                <select value={countryCode} onChange={event => setCountryCode(event.target.value)} aria-label="Indicatif du pays">
+                  {countryCodes.map(country => <option key={country.value} value={country.value}>{country.label} · {country.name}</option>)}
+                </select>
+              </label>
+              <input id={`${formId}-phone`} name="phone" type="tel" inputMode="tel" autoComplete="tel-national" value={answers.phone} onChange={event => updateAnswer("phone", event.target.value)} placeholder="6 00 00 00 00" maxLength={30} aria-invalid={Boolean(errors.phone)} aria-describedby={errors.phone ? `${formId}-phone-error` : undefined} required />
+            </div>
             {fieldError("phone")}
           </div>
 

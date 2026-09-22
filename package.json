@@ -8,7 +8,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint src",
-    "test": "node scripts/bng-meta-pixel.test.cjs && node scripts/bng-clarity.test.cjs && node scripts/check-handoff.mjs",
+    "test": "node scripts/bng-meta-pixel.test.cjs && node scripts/bng-clarity.test.cjs && node scripts/check-handoff.mjs && node scripts/bng-availability.test.cjs",
     "vendor:images": "node scripts/vendor-images.mjs"
   },
   "dependencies": {

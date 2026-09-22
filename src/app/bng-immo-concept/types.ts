@@ -1,9 +1,11 @@
-export type ProjectId = "jardin-alma" | "m-resort" | "naia-hills" | "elyazia" | "ayline-garden";
+export type ProjectId = "jardin-alma" | "m-resort" | "naia-hills" | "elyazia" | "ayline-garden" | "jardin-eden" | "plaza-view";
 export type PaymentStep = { percent: number; label: string; shortLabel: string; event: "reservation" | "scheduled" | "keys" | "title_notary"; month?: number };
 export type ProjectPhoto = { src: string; alt: string; caption: string };
 export type BngProject = {
   id: ProjectId;
   name: string;
+  soldOut?: boolean;
+  delivered?: boolean;
   kind: "villa" | "apartment" | "land";
   category: string;
   headline: string;

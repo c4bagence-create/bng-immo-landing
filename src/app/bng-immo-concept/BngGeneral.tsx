@@ -100,8 +100,9 @@ export default function BngGeneral() {
           <div className={styles.headlineSpace} aria-live={autoPlay ? "off" : "polite"} aria-atomic="true">
             <KineticHeading key={project.id} as="h1" text={project.headline} accent={project.highlight} />
           </div>
-          <ProjectFacts project={project} />
-          <ProjectAmenities project={project} />
+          {project.soldOut && <p className={styles.soldDescription}>{project.description}</p>}
+          <ProjectFacts key={project.id} project={project} />
+          {project.features.length > 0 && <ProjectAmenities project={project} />}
           <div className={styles.heroActions}>
             <AdvisorCta />
             <a className={styles.whatsappCta} href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" aria-label="Contacter un conseiller sur WhatsApp — ouvre une nouvelle fenêtre">

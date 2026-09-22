@@ -39,6 +39,11 @@
 .field input::placeholder { color: #766758; opacity: 1; }
 .field input:focus { border-color: #a8431c; box-shadow: 0 0 0 3px #f15a241c; }
 .field input[aria-invalid="true"] { border-color: #a9382b; }
+.phoneRow { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 7px; }
+.countryCode { min-width: 0; }
+.countryCode select { display: block; width: 100%; min-height: 46px; padding: 10px 28px 10px 9px; border: 1px solid #d5c7b9; border-radius: 7px; outline: none; background: #fffdf9; color: var(--qualification-ink); font: inherit; font-size: 13px; cursor: pointer; }
+.countryCode select:focus { border-color: #a8431c; box-shadow: 0 0 0 3px #f15a241c; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .form .primaryButton { display: flex; width: 100%; min-height: 52px; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 5px 5px 13px; border: 1px solid #f15a24; border-radius: 9px; background: #f15a24; color: var(--qualification-ink); font-family: inherit; font-size: 13px; font-weight: 650; line-height: 1.4; text-align: left; cursor: pointer; box-shadow: 0 6px 14px -9px #86533066; transition: background .16s, transform .16s; }
 .form .primaryButton:hover { background: #ff6b34; }
 .primaryButton:active { transform: translateY(1px); }

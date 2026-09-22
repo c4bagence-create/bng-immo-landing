@@ -33,8 +33,6 @@ function serverChoice() { return null; }
 export default function MetaPixelConsent() {
   const choice = useSyncExternalStore(subscribe, readChoice, serverChoice);
   const [editing, setEditing] = useState(false);
-  const [analyticsDraft, setAnalyticsDraft] = useState(false);
-  const [adsDraft, setAdsDraft] = useState(false);
   const analytics = choice === "analytics" || choice === "all";
   const ads = choice === "ads" || choice === "all";
   useEffect(() => {
@@ -61,16 +59,11 @@ export default function MetaPixelConsent() {
   return <aside className={styles.privacy} aria-label="Préférences de confidentialité">
     {ads && <BehaviorTracking />}
     {choice === null || editing ? <div className={styles.panel} role="region" aria-labelledby="bng-meta-consent-title">
-      <strong id="bng-meta-consent-title">Vos préférences de confidentialité</strong>
-      <p>Choisissez les outils autorisés. Le site fonctionne aussi sans suivi.</p>
-      <label className={styles.option}><input type="checkbox" checked={analyticsDraft} onChange={e => setAnalyticsDraft(e.target.checked)} /><span><b>Analyse du parcours · Microsoft Clarity</b><small>Replays, clics et défilement pour améliorer le site. Formulaire masqué.</small></span></label>
-      <label className={styles.option}><input type="checkbox" checked={adsDraft} onChange={e => setAdsDraft(e.target.checked)} /><span><b>Publicité · Meta</b><small>Visites et interactions pour mesurer les campagnes et personnaliser les publicités. Sans les réponses du formulaire.</small></span></label>
+      <strong id="bng-meta-consent-title">Ce site utilise des cookies</strong>
       <div className={styles.actions}>
-        <button type="button" onClick={() => choose("none")}>Tout refuser</button>
-        <button type="button" onClick={() => choose("all")}>Tout accepter</button>
-        <button className={styles.save} type="button" onClick={() => choose(analyticsDraft ? adsDraft ? "all" : "analytics" : adsDraft ? "ads" : "none")}>Enregistrer mes choix</button>
+        <button type="button" onClick={() => choose("all")}>Accepter</button>
+        <button type="button" onClick={() => choose("none")}>Refuser</button>
       </div>
-      <a href="https://privacy.microsoft.com/fr-fr/privacystatement" target="_blank" rel="noopener noreferrer">Confidentialité Microsoft</a>{" · "}<a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">Confidentialité Meta</a>
-    </div> : <button className={styles.preferences} type="button" onClick={() => { setAnalyticsDraft(analytics); setAdsDraft(ads); setEditing(true); }}>Confidentialité : mes choix</button>}
+    </div> : <button className={styles.preferences} type="button" onClick={() => setEditing(true)}>Cookies</button>}
   </aside>;
 }

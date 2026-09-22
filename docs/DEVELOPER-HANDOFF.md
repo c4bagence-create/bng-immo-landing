@@ -10,7 +10,7 @@ La racine `/` redirige vers la page générale afin de conserver les routes exis
 
 - `src/app/bng-immo-concept/projects.ts` : cinq projets, prix en DH, surfaces, localisation, livraison, photos et échéanciers. C’est la source utilisée par le hero et le plan de paiement synchronisés.
 - `types.ts` : schéma `BngProject` / `PaymentStep`.
-- `ProjectProofs.tsx` (dossier M Resort) : Plaza View, Jardin d’Éden et Jardin d’Alma.
+- `ProjectProofs.tsx` (dossier M Resort) : El Messaoudi Home, Jardin d’Éden et Jardin d’Alma.
 - `ClientStories.tsx` : témoignages réels locaux.
 - `BngGeneral.tsx` : ordre des sections, textes, CTA et lien WhatsApp public +212673322505.
 - SVG de données : `ProjectFacts`, `ProjectAmenities`, `ProjectPayment`, `BngLegalDossier`, `FinalInvitation`, `AnimatedBngLogo`.

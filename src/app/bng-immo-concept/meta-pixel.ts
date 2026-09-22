@@ -26,7 +26,7 @@ export function trackBngEvent(event: BngEvent, properties: BngEventProperties = 
   const w = window as PixelWindow;
   if (!w.fbq || (onceKey && sentEvents.has(`${event}:${onceKey}`))) return false;
   const safe: BngEventProperties = {};
-  if (["m-resort", "jardin-alma", "naia-hills", "elyazia", "ayline-garden"].includes(properties.project_id ?? "")) safe.project_id = properties.project_id;
+  if (["m-resort", "jardin-alma", "naia-hills", "elyazia", "ayline-garden", "jardin-eden", "plaza-view"].includes(properties.project_id ?? "")) safe.project_id = properties.project_id;
   if (["top", "paiement", "preuves-bng", "clients", "dossier-acquisition", "parcours", "qualification", "faq", "votre-projet"].includes(properties.section ?? "")) safe.section = properties.section;
   if (["budget", "timing", "firstname", "phone"].includes(properties.field ?? "")) safe.field = properties.field;
   for (const key of ["step", "percent", "seconds", "error_count"] as const) {
