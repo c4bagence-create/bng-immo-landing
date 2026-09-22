@@ -17,7 +17,7 @@ export const PROJECTS: BngProject[] = [
     kind: "villa",
     category: "Villas avec piscine privée",
     headline: "Votre villa avec piscine.",
-    highlight: "SOLD OUT · Liste d’attente.",
+    highlight: "Sur liste d’attente.",
     description: "Les villas sont vendues. Jardin d’Alma est désormais sur liste d’attente.",
     price: 2986400,
     surface: "179 m² habitables",

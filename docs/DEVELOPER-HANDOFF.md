@@ -76,7 +76,7 @@ Ne pas enregistrer silencieusement le prénom ou téléphone au fil de la frappe
 
 Les photos `bngimmo.com/images/projets/…` sont copiées dans `public/bng-projects/` et les références adaptées pour permettre un déploiement autonome. `docs/media-manifest.json` conserve leur origine et leur taille. Les photos terrain et témoignages MP4 sont sous `public/m-resort-concept/`. Aucun fichier `.env`, token, dump CRM ou donnée d’agence n’est embarqué.
 
-Dépendances externes restantes voulues : vidéo YouTube officielle dans la variante M Resort, liens de visite Vertex, WhatsApp, scripts Meta/TikTok/Clarity après consentement, téléchargement de la police Inter par Next au build. La police Montserrat locale est incluse. Les anciens médias inactifs sont conservés pour la reprise, pas destinés à remplacer les preuves réelles.
+Dépendances externes restantes voulues : vidéo YouTube officielle dans la variante M Resort, liens de visite Vertex, WhatsApp et scripts Meta/TikTok/Clarity après consentement. Les polices Inter et Montserrat sont incluses localement pour fiabiliser le build. Les anciens médias inactifs sont conservés pour la reprise, pas destinés à remplacer les preuves réelles.
 
 ## 6. Déploiement et domaine
 
