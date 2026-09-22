@@ -60,22 +60,23 @@ Projets : `jardin-alma`, `m-resort`, `naia-hills`, `elyazia`, `ayline-garden`, `
 
 Ne pas enregistrer silencieusement le prénom ou téléphone au fil de la frappe. Le suivi d’interaction existant ne contient pas les valeurs des champs.
 
-## 4. Meta et Clarity
+## 4. Meta, TikTok et Clarity
 
 - Pixel Meta public : `1100056449551466`, `meta-pixel.ts`.
+- Pixel TikTok Ads public : `DAP6K5RC77U9P1Q6CF9G`, `tiktok-pixel.ts`.
 - Clarity public : `ylvf4t33ng`, `clarity-tracking.ts`.
-- `MetaPixelConsent.tsx` gère deux choix séparés analyse/publicité, refus et retrait. Clarity n’est pas subordonné à l’accord Meta.
+- `MetaPixelConsent.tsx` applique le choix publicitaire à Meta et TikTok, et le choix analytique à Clarity. Refus et retrait coupent les pixels concernés.
 - **Aucun script de tracking global supplémentaire n’est présent dans cette extraction.** Avant intégration dans bngimmo.com, vérifier les tags déjà chargés par le site/CMP/GTM pour éviter doublons et conflits. Si une CMP existe, remplacer le panneau local par ses signaux de consentement.
 - Formulaire masqué avec `data-clarity-mask="true"`; pas de `identify` Clarity ni d’advanced matching Meta avec les coordonnées.
-- `PageView` après accord ; interactions documentées dans le plan tracking. `form_preview_completed` = validation locale, **pas un vrai Lead**.
+- `PageView` Meta et TikTok après accord ; interactions documentées dans le plan tracking. `form_preview_completed` = validation locale, **pas un vrai Lead**.
 - Pour `Lead` après CRM : étendre explicitement la liste d’événements, attendre le succès serveur et émettre une seule fois par identifiant de soumission. CAPI éventuelle : mêmes `event_name`/`event_id` navigateur/serveur, token serveur, choix de consentement respecté. Ne pas utiliser `form_preview_completed` comme conversion de prospect reçu.
-- Tester dans Meta Events Manager et dans le compte Clarity. Les tests de ce dépôt ne prouvent pas la réception dans les comptes externes.
+- Tester dans Meta Events Manager, TikTok Events Manager et dans le compte Clarity. Les tests de ce dépôt ne prouvent pas la réception dans les comptes externes.
 
 ## 5. Médias et dépendances externes
 
 Les photos `bngimmo.com/images/projets/…` sont copiées dans `public/bng-projects/` et les références adaptées pour permettre un déploiement autonome. `docs/media-manifest.json` conserve leur origine et leur taille. Les photos terrain et témoignages MP4 sont sous `public/m-resort-concept/`. Aucun fichier `.env`, token, dump CRM ou donnée d’agence n’est embarqué.
 
-Dépendances externes restantes voulues : vidéo YouTube officielle dans la variante M Resort, liens de visite Vertex, WhatsApp, scripts Meta/Clarity après consentement, téléchargement de la police Inter par Next au build. La police Montserrat locale est incluse. Les anciens médias inactifs sont conservés pour la reprise, pas destinés à remplacer les preuves réelles.
+Dépendances externes restantes voulues : vidéo YouTube officielle dans la variante M Resort, liens de visite Vertex, WhatsApp, scripts Meta/TikTok/Clarity après consentement, téléchargement de la police Inter par Next au build. La police Montserrat locale est incluse. Les anciens médias inactifs sont conservés pour la reprise, pas destinés à remplacer les preuves réelles.
 
 ## 6. Déploiement et domaine
 
@@ -93,9 +94,9 @@ Les layouts contiennent `robots: { index: false, follow: false }` pour les aper�
 - iPhone 375/390 px : hero, choix de projets, galeries, SVG, paiement et CTA vers le formulaire sans saut de retour.
 - Contrôler tous les médias, les échéances et les prix avec BNG.
 - Formulaire : champs manquants, téléphone invalide, succès CRM, timeout, double clic, retry ; aucune fausse confirmation.
-- Refus : aucun Meta/Clarity ; accepter un seul fournisseur ne charge pas l’autre ; retrait et rechargement vérifiés.
+- Refus : aucun Meta/TikTok/Clarity ; retrait et rechargement vérifiés.
 - Vérifier le masquage dans une session Clarity de test, sans vraies coordonnées.
-- Meta : `PageView` unique, aucune conversion sur affichage simple, `Lead` uniquement après réception CRM.
+- Meta/TikTok : `PageView` unique par pixel, aucune conversion lead sur affichage simple, conversion uniquement après réception CRM.
 - Valider les textes de confidentialité, les liens utiles et la politique de conservation avant campagnes.
 
 ## 8. Transmission GitHub

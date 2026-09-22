@@ -6,8 +6,10 @@ const ts = require('typescript');
 const source = fs.readFileSync('src/app/bng-immo-concept/meta-pixel.ts', 'utf8');
 const code = ts.transpile(source, { module: ts.ModuleKind.CommonJS });
 const scripts = [];
+const tiktokEvents = [];
 const sandbox = {
   exports: {},
+  require: name => name === './tiktok-pixel' ? { trackBngTikTokEvent: (...args) => tiktokEvents.push(args) } : {},
   window: {},
   document: {
     querySelector: () => scripts[0] ?? null,
@@ -42,6 +44,7 @@ assert.equal(queue.some(c => c.some(v => typeof v === 'object')), false, 'No cus
 assert.equal(trackBngEvent('project_selected', { project_id: 'jardin-alma', firstname: 'TEST', phone: 'SECRET', budget: 'SECRET' }, 'alma'), true);
 assert.equal(trackBngEvent('project_selected', { project_id: 'jardin-alma' }, 'alma'), false, 'Dedup per project');
 assert.deepEqual(JSON.parse(JSON.stringify(sandbox.window.fbq.queue.at(-1))), ['trackSingleCustom', BNG_PIXEL_ID, 'project_selected', { project_id: 'jardin-alma' }]);
+assert.deepEqual(JSON.parse(JSON.stringify(tiktokEvents.at(-1))), ['project_selected', { project_id: 'jardin-alma' }], 'TikTok receives the same sanitized event');
 assert.equal(trackBngEvent('Lead'), false, 'Lead is not allowed without backend delivery');
 trackBngEvent('form_field_interacted', { field: 'phone', project_id: 'arbitrary', seconds: Infinity, section: 'unsafe', phone: 'SECRET' }, 'phone');
 assert.deepEqual(JSON.parse(JSON.stringify(sandbox.window.fbq.queue.at(-1))), ['trackSingleCustom', BNG_PIXEL_ID, 'form_field_interacted', { field: 'phone' }]);

@@ -30,7 +30,8 @@ const JOURNEY = [
   { image: "04-visite-projet", title: "On visite.", text: "Sur place ou à distance." },
 ];
 
-const WHATSAPP_HREF = `https://wa.me/212673322505?text=${encodeURIComponent("Bonjour, je souhaite être contacté par un conseiller")}`;
+const WHATSAPP_MESSAGE = "Bonjour, je viens de voir la story de Moulay et Soum et je souhaiterais en savoir plus sur vos projets immobiliers.";
+const WHATSAPP_HREF = `https://wa.me/212673322505?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const reduced = useReducedMotion();

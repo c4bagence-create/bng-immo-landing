@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { disableBngPixel, enableBngPixel } from "./meta-pixel";
 import { disableBngClarity, enableBngClarity } from "./clarity-tracking";
+import { disableBngTikTokPixel, enableBngTikTokPixel } from "./tiktok-pixel";
 import styles from "./MetaPixelConsent.module.css";
 import BehaviorTracking from "./BehaviorTracking";
 
@@ -36,9 +37,17 @@ export default function MetaPixelConsent() {
   const analytics = choice === "analytics" || choice === "all";
   const ads = choice === "ads" || choice === "all";
   useEffect(() => {
-    if (ads) enableBngPixel();
-    else disableBngPixel();
-    return disableBngPixel;
+    if (ads) {
+      enableBngPixel();
+      enableBngTikTokPixel();
+    } else {
+      disableBngPixel();
+      disableBngTikTokPixel();
+    }
+    return () => {
+      disableBngPixel();
+      disableBngTikTokPixel();
+    };
   }, [ads]);
   useEffect(() => {
     if (analytics) enableBngClarity(); else disableBngClarity();
@@ -50,7 +59,10 @@ export default function MetaPixelConsent() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ choice: next, expires: Date.now() + SIX_MONTHS }));
       memoryChoice = null;
     } catch { memoryChoice = next; }
-    if (next !== "all" && next !== "ads") disableBngPixel();
+    if (next !== "all" && next !== "ads") {
+      disableBngPixel();
+      disableBngTikTokPixel();
+    }
     if (next !== "all" && next !== "analytics") disableBngClarity();
     window.dispatchEvent(new Event(CHANGE_EVENT));
     setEditing(false);

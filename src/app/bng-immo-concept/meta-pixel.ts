@@ -1,3 +1,5 @@
+import { trackBngTikTokEvent } from "./tiktok-pixel";
+
 export const BNG_PIXEL_ID = "1100056449551466";
 export const META_SCRIPT_URL = "https://connect.facebook.net/en_US/fbevents.js";
 
@@ -34,6 +36,7 @@ export function trackBngEvent(event: BngEvent, properties: BngEventProperties = 
     if (typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 300) safe[key] = value;
   }
   w.fbq("trackSingleCustom", BNG_PIXEL_ID, event, safe);
+  trackBngTikTokEvent(event, safe);
   if (onceKey) sentEvents.add(`${event}:${onceKey}`);
   return true;
 }
