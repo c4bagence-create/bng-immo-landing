@@ -1,11 +1,11 @@
-# BNG landing — suivi Meta
+# BNG landing — suivi Meta et TikTok
 
-Pixel : 1100056449551466. Périmètre : `/bng-immo-concept`.
-Tous les événements sont bloqués avant accord publicitaire et après retrait. Aucun événement antérieur à l’accord n’est rejoué. Choix v2 (nouvel accord pour le périmètre interactions). Aucun budget, horizon d’achat, prénom, téléphone, texte libre ou valeur de champ n’est ajouté aux paramètres. Les paramètres sont filtrés par une liste fermée.
+Pixel Meta : `1100056449551466`. Pixel TikTok : `DAP6K5RC77U9P1Q6CF9G`. Périmètre : `/bng-immo-concept`.
+Tous les événements sont bloqués avant accord publicitaire et après retrait. Aucun événement antérieur à l’accord n’est rejoué. Meta et TikTok reçoivent les mêmes événements et propriétés filtrés. Aucun budget, horizon d’achat, prénom, téléphone, texte libre ou valeur de champ n’est ajouté aux paramètres.
 
 | Événement | Déclenchement | Comptage par document |
 | --- | --- | --- |
-| PageView | Chargement avec accord Meta | Une fois |
+| PageView | Chargement avec accord publicitaire Meta/TikTok | Une fois par pixel |
 | project_selected | Sélection manuelle du programme, pas défilement automatique | Une fois par projet |
 | gallery_interacted | Flèche, miniature ou swipe de la galerie | Une fois par projet |
 | payment_step_selected | Choix manuel d’une tranche, clavier inclus | Une fois par projet/tranche |
@@ -21,7 +21,7 @@ Tous les événements sont bloqués avant accord publicitaire et après retrait.
 | form_validation_error | Validation refusée | Une fois ; nombre de champs invalides uniquement |
 | form_preview_completed | Les 4 champs passent la validation locale | Une fois ; **pas un Lead reçu** |
 
-Pas d’enregistrement de session, de frappes clavier ou de mouvement de souris ajouté. Clarity/PostHog préexistants non modifiés. Pas de pile de pixels tiers supplémentaires sans compte/destination désigné.
+Pas d’enregistrement de frappes clavier ou de mouvement de souris ajouté. Clarity reste masqué sur le formulaire. Aucun autre pixel tiers n’est chargé sans compte/destination désigné.
 
 ## Conversion finale à connecter
 
@@ -35,6 +35,6 @@ Le formulaire est un aperçu sans envoi ni stockage. Ne pas utiliser `form_previ
 - Formulaire commencé sans `form_preview_completed` (abandon du remplissage local, pas de la transmission CRM).
 - Clics WhatsApp (intention de contact uniquement).
 
-Les audiences, conversions personnalisées, règles et réception restent à vérifier dans le compte Meta. Consentement, bloqueurs et restrictions publicitaires peuvent réduire la mesure et les audiences disponibles.
+Les audiences, conversions personnalisées, règles et réception restent à vérifier dans les comptes Meta et TikTok Ads. Consentement, bloqueurs et restrictions publicitaires peuvent réduire la mesure et les audiences disponibles.
 
-Validation locale : `node scripts/bng-meta-pixel.test.cjs`, ESLint ciblé, build Next.js. Le test prouve le filtrage des paramètres, l’absence d’événements sans accord, la déduplication et le refus de `Lead` dans cet aperçu, pas la réception dans Meta.
+Validation locale : `node scripts/bng-meta-pixel.test.cjs`, `node scripts/bng-tiktok-pixel.test.cjs`, ESLint et build Next.js. Les tests prouvent le filtrage des paramètres, l’absence d’événements sans accord, la déduplication et le refus de conversion lead dans cet aperçu, pas la réception dans les plateformes.

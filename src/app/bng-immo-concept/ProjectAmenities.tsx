@@ -5,13 +5,14 @@ import { useId } from "react";
 import type { BngProject } from "./types";
 import styles from "./ProjectAmenities.module.css";
 
-type AmenityKind = "construction" | "camera" | "report" | "signature" | "pool" | "lagoon" | "rooftop" | "padel" | "padel-fitness" | "fitness" | "fitness-outdoor" | "fitness-roof" | "security" | "parking" | "plot" | "playground" | "terrace" | "facades" | "floors" | "basement";
+type AmenityKind = "construction" | "camera" | "report" | "signature" | "gain" | "pool" | "lagoon" | "rooftop" | "padel" | "padel-fitness" | "fitness" | "fitness-outdoor" | "fitness-roof" | "security" | "parking" | "plot" | "playground" | "terrace" | "facades" | "floors" | "basement";
 type Amenity = { kind: AmenityKind; label: string; detail?: string };
 
 const AMENITIES: Record<string, Amenity> = {
   "Chantier lancé en 2024": { kind: "construction", label: "Début chantier", detail: "2024" },
   "Piscine en rooftop": { kind: "pool", label: "Piscine", detail: "en rooftop" },
   "Livré en juin 2025": { kind: "signature", label: "Livré", detail: "juin 2025" },
+  "20 à 30 % de plus-value à la livraison": { kind: "gain", label: "+20 à 30 %", detail: "plus-value à la livraison" },
   "28 villas": { kind: "floors", label: "28 villas" },
   "Chantier en cours": { kind: "construction", label: "Chantier", detail: "en cours" },
   "Suivi du chantier par caméra": { kind: "camera", label: "Suivi du chantier", detail: "par caméra" },
@@ -86,6 +87,15 @@ function AmenityScene({ kind }: { kind: AmenityKind }) {
       <motion.g {...enter(0, 7, -5)}><path d="M23 24L86 15L97 69L34 78Z" fill="#e1d2bc" /><path d="M20 19L83 10L94 64L31 73Z" fill={paper} stroke="#d0bfa5" /><path d="M35 28L67 24M37 35L77 29" stroke="#c1ae90" strokeWidth="2" strokeLinecap="round" />
       <motion.path d="M36 58C54 30 41 65 54 49S53 66 66 52S66 62 78 48M39 63L78 57" fill="none" stroke="#f15a24" strokeWidth="2" strokeLinecap="round" {...draw(.35)} /></motion.g>
       <motion.g {...enter(.3, -9, 12)}><path d="M99 19L78 58L76 68L83 61L104 22Z" fill="#494331" /><path d="M99 19L104 22M78 58L83 61" stroke="#cbad76" strokeWidth="2" /></motion.g>
+    </>}
+    {kind === "gain" && <>
+      <motion.g {...enter(0, 7, -3)}>
+        <path d="M20 70V51H40V70M43 70V38H63V70M66 70V26H86V70" fill={paper} stroke="#c9b697" strokeWidth="1.8" strokeLinejoin="round" />
+        <path d="M20 70H91" stroke="#9d8b72" strokeWidth="2" strokeLinecap="round" />
+        <path d="M24 59H36M47 48H59M70 36H82" stroke="#dfcbb0" strokeWidth="2" strokeLinecap="round" />
+      </motion.g>
+      <motion.path d="M16 46L43 31L61 37L91 14M81 14H91V24" fill="none" stroke="#f15a24" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" {...draw(.25)} />
+      <motion.g {...enter(.55, -8, 5)}><circle cx="95" cy="48" r="14" fill={orange} /><text x="95" y="53" textAnchor="middle" fill="#fffaf3" fontSize="16" fontWeight="750" fontFamily="Arial, sans-serif">%</text></motion.g>
     </>}
     {(kind === "pool" || kind === "lagoon") && <motion.g {...enter()}>
       <path d="M14 46L61 22L108 44V52L60 77L14 54Z" fill="#d8c5a7" />

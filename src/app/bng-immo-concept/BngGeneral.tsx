@@ -30,7 +30,8 @@ const JOURNEY = [
   { image: "04-visite-projet", title: "On visite.", text: "Sur place ou à distance." },
 ];
 
-const WHATSAPP_HREF = `https://wa.me/212673322505?text=${encodeURIComponent("Bonjour, je souhaite être contacté par un conseiller")}`;
+const WHATSAPP_MESSAGE = "Bonjour, je viens de voir la story de Moulay et Soum et je souhaiterais en savoir plus sur vos projets immobiliers.";
+const WHATSAPP_HREF = `https://wa.me/212673322505?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const reduced = useReducedMotion();
@@ -100,7 +101,7 @@ export default function BngGeneral() {
           <div className={styles.headlineSpace} aria-live={autoPlay ? "off" : "polite"} aria-atomic="true">
             <KineticHeading key={project.id} as="h1" text={project.headline} accent={project.highlight} />
           </div>
-          {project.soldOut && <p className={styles.soldDescription}>{project.description}</p>}
+          {project.soldOut && project.id !== "plaza-view" && <p className={styles.soldDescription}>{project.description}</p>}
           <ProjectFacts key={project.id} project={project} />
           {project.features.length > 0 && <ProjectAmenities project={project} />}
           <div className={styles.heroActions}>

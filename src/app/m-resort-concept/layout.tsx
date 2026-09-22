@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./m-resort-concept.css";
 import "./mobile-chapters.css";
 
-const inter = Inter({
+const inter = localFont({
+  src: "../../../public/fonts/inter-latin.woff2",
   variable: "--font-mr",
-  subsets: ["latin"],
+  weight: "400 900",
   display: "swap",
 });
 

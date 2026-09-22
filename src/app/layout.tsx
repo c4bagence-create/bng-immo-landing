@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
+const inter = localFont({ src: "../../public/fonts/inter-latin.woff2", variable: "--font-inter", weight: "400 900", display: "swap" });
 export const metadata: Metadata = {
   title: "BNG Immo — Projets immobiliers à Marrakech",
   description: "Les projets immobiliers BNG Immo à Marrakech.",

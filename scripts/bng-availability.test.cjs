@@ -8,13 +8,15 @@ function load(file) {
   return module.exports;
 }
 const { ALMA_LOTS, ALMA_STOCK_CHECKED, ALMA_AVAILABLE_COUNT } = load('src/app/bng-immo-concept/alma-availability.ts');
-assert.equal(ALMA_AVAILABLE_COUNT, 7);
+assert.equal(ALMA_AVAILABLE_COUNT, 0);
 const { PROJECTS } = load('src/app/bng-immo-concept/projects.ts');
 assert.equal(PROJECTS.at(-1).id, 'plaza-view');
 assert.equal(PROJECTS.at(-1).name, 'El Messaoudi Home');
 assert.equal(PROJECTS.at(-1).delivered, true);
 assert.equal(PROJECTS.at(-1).soldOut, true);
 assert.equal(PROJECTS.at(-1).photos.length, 9);
+assert.equal(PROJECTS.find(project => project.id === 'jardin-alma').soldOut, true);
+assert.equal(PROJECTS.find(project => project.id === 'jardin-alma').waitlist, true);
 for (const photo of PROJECTS.at(-1).photos) assert.ok(fs.existsSync('public' + photo.src));
 assert.equal(ALMA_LOTS.length, 11);
 assert.equal(new Set(ALMA_LOTS.map(lot => lot.id)).size, 11);
@@ -26,4 +28,4 @@ for (const lot of ALMA_LOTS) {
   const paid = PROJECTS.find(p => p.id === 'jardin-alma').payments.reduce((sum, step) => sum + lot.price * step.percent / 100, 0);
   assert.equal(paid, lot.price);
 }
-console.log('Alma inventory: source snapshot validated; current displayed availability is 7 lots.');
+console.log('Alma inventory: source snapshot validated; current commercial status is sold out with a waiting list.');
