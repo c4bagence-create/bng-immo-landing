@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@theme inline { --font-sans: var(--font-inter); }
+html { min-height: 100%; }
+body { margin: 0; min-height: 100vh; background: #faf8f3; color: #24231e; font-family: var(--font-inter), Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing: -.011em; }
+* { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.1) transparent; }

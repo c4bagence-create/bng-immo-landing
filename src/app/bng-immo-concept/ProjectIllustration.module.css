@@ -1,0 +1,4 @@
+.illustration { width: 100%; min-width: 0; max-width: 650px; aspect-ratio: 5 / 3; margin-inline: auto; isolation: isolate; pointer-events: none; }
+.art { display: block; height: 100%; width: 100%; overflow: visible; }
+.compact { max-width: 360px; }
+@media (prefers-reduced-motion: reduce) { .illustration *, .illustration *::before, .illustration *::after { transition: none !important; animation: none !important; } }
