@@ -133,7 +133,7 @@ export default function BngGeneral() {
 
     <section className={styles.journey} id="parcours"><div className={styles.sectionIntro}><KineticTitle text="Un conseiller." accent="À chaque étape." /></div><div className={styles.journeyRail}>{JOURNEY.map((step, i) => <Reveal key={step.title} className={styles.journeyItem}><figure><div className={styles.journeyPhoto}><Image src={`/m-resort-concept/journey/${step.image}.jpg`} alt={step.text} fill sizes="(max-width: 700px) 66vw, 25vw" /></div><figcaption><span>{String(i + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.text}</p></figcaption></figure></Reveal>)}</div><div className={styles.journeyHint}>Votre parcours, accompagné du début à la fin.<ArrowRight size={17} /></div><div className={styles.sectionCta}><AdvisorCta /></div></section>
 
-    <ProjectQualification project={project} projects={PROJECTS} onProjectChange={choose} />
+    <ProjectQualification />
 
     <section className={styles.faq} data-track-section="faq" aria-labelledby="faq-title"><KineticTitle id="faq-title" text="Avant de" accent="se lancer." /><div className={styles.faqList}>
       {[

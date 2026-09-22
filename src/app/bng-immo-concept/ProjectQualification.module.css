@@ -13,9 +13,6 @@
 .description { max-width: 38ch; margin: 10px 0 0; color: var(--qualification-muted); font-size: 13px; line-height: 1.5; }
 .form { width: 100%; min-width: 0; max-width: 500px; margin: 0 auto; padding: 19px 17px 17px; border: 2px solid #f15a24; border-radius: 17px; background: #fffefd; box-shadow: 0 14px 36px -24px #d5502699; scroll-margin-top: 24px; }
 .form:focus { outline: none; }
-.formHeading { margin-bottom: 15px; }
-.projectBadge { display: inline-flex; align-items: center; gap: 6px; min-height: 23px; margin: 0; padding: 3px 8px; border-radius: 5px; background: #f4e7d9; color: #70482f; font-size: 10px; font-weight: 600; line-height: 1.4; }
-.projectBadge > span { width: 5px; height: 5px; flex: 0 0 5px; border-radius: 50%; background: #c64a1c; }
 .fields { display: grid; gap: 12px; }
 .choiceGroup { min-width: 0; margin: 0; padding: 0; border: 0; }
 .choiceGroup > legend { display: block; width: 100%; margin-bottom: 7px; padding: 0; color: var(--qualification-ink); font-size: 12px; font-weight: 600; line-height: 1.4; }

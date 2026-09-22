@@ -3,18 +3,12 @@
 import { useId, useRef, useState, type FormEvent } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import KineticHeading from "./KineticHeading";
-import type { BngProject, ProjectId } from "./types";
 import styles from "./ProjectQualification.module.css";
 import { trackBngEvent } from "./meta-pixel";
 
 type QualificationAnswers = { budget: string; timing: string; firstname: string; phone: string };
 type QualificationField = keyof QualificationAnswers;
 type QualificationErrors = Partial<Record<QualificationField, string>>;
-type QualificationProps = {
-  project: BngProject;
-  projects?: BngProject[];
-  onProjectChange?: (id: ProjectId) => void;
-};
 
 const budgetOptions = [
   { value: "up-to-100k-eur", label: "≤ 100 000 €", accessible: "Jusqu’à 100 000 euros" },
@@ -40,14 +34,14 @@ const timingOptions = [
   { value: "exploring", label: "Je me renseigne" },
 ];
 
-export default function ProjectQualification({ project }: QualificationProps) {
+export default function ProjectQualification() {
   const formId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [answers, setAnswers] = useState<QualificationAnswers>({ budget: "", timing: "", firstname: "", phone: "" });
   const [countryCode, setCountryCode] = useState("+212");
   const [errors, setErrors] = useState<QualificationErrors>({});
   const [checkedSignature, setCheckedSignature] = useState<string | null>(null);
-  const currentSignature = JSON.stringify([project.id, answers, countryCode]);
+  const currentSignature = JSON.stringify([answers, countryCode]);
   const locallyChecked = checkedSignature === currentSignature;
 
   function updateAnswer(field: QualificationField, value: string) {
@@ -93,10 +87,6 @@ export default function ProjectQualification({ project }: QualificationProps) {
       </div>
 
       <form id="qualification" ref={formRef} className={`${styles.form} ph-no-capture`} data-clarity-mask="true" tabIndex={-1} aria-labelledby={`${formId}-title`} onSubmit={handleSubmit} noValidate>
-        <header className={styles.formHeading}>
-          <p className={styles.projectBadge}><span aria-hidden="true" />{project.name}</p>
-        </header>
-
         <div className={styles.fields}>
           <fieldset className={styles.choiceGroup} aria-describedby={`${formId}-budget-hint${errors.budget ? ` ${formId}-budget-error` : ""}`}>
             <legend>Budget disponible <span>en euros</span></legend>
