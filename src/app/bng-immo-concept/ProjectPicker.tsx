@@ -34,7 +34,7 @@ export default function ProjectPicker({ projects, selected, onSelect, compact = 
         onSelect(projects[next].id); buttons.current[next]?.focus({ preventScroll: true });
       }}>
       <span className={styles.choiceThumb}><Image src={project.photos[0].src} alt="" fill sizes="80px" /></span>
-      <span className={styles.choiceCopy}><strong>{project.name}</strong>{project.soldOut ? <span className={styles.soldTag}>{project.delivered ? "LIVRÉ · SOLD OUT" : project.waitlist ? "SOLD OUT · LISTE D’ATTENTE" : "SOLD OUT"}</span> : <small>{project.category}</small>}</span>
+      <span className={styles.choiceCopy}><strong>{project.name}</strong>{project.soldOut ? <span className={styles.soldTag}>{project.delivered ? "LIVRÉ · SOLD OUT" : project.waitlist ? <>SOLD OUT<br />LISTE D’ATTENTE</> : "SOLD OUT"}</span> : <small>{project.category}</small>}</span>
       <span className={styles.choiceState}>{selected === project.id ? <Check size={16} aria-hidden /> : <ArrowRight size={15} aria-hidden />}</span>
     </button>)}
   </div>;
